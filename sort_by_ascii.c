@@ -133,8 +133,6 @@ int swap_elem(int pos1, int pos2, s_control *list)
     if (pos1 <= 0 || pos1 > list->size || pos2 <= 0 || pos2 > list->size)
         return FAILURE;
 
-    // printf("-------------------\n");
-    // printf("size of list is %d\n", list->size);
     while (tmp && ++i <= list->size)
     {
         if (tmp->index == pos1 - 1)
@@ -147,22 +145,11 @@ int swap_elem(int pos1, int pos2, s_control *list)
             node2 = tmp;
         tmp = tmp->next;
     }
-    // Link previous of node1 with node2
     if (prev1 != NULL)
-    {
         prev1->next = node2;
-        // printf("prev node 1 is %s\n", prev1->str);
-    }
-
-    // Link previous of node2 with node1
     if (prev2 != NULL)
-    {
         prev2->next = node1;
-        // printf("prev node 2 is %s\n\n", prev2->str);
-    }
 
-    // printf("node 1 is %s\n", node1->str);
-    // printf("node 2 is %s\n", node2->str);
     s_elem *tmp1;
     if (node2->next == NULL)
     {
@@ -181,8 +168,6 @@ int swap_elem(int pos1, int pos2, s_control *list)
     else if (prev2 == NULL)
         list->first = node1;
     add_index(list->first);
-    // print_list(list);
-    // printf("-------------------\n");
     return SUCCESS;
 }
 
@@ -190,7 +175,6 @@ s_bool is_ascii_ordered(char *str1, char *str2)
 {
     int i = 0;
 
-    //TODO: pbm avec bwieuu et bwieu mai I think que c est plutot li au swap
     while (str1[i] && str2[i])
     {
         while (str1[i] == str2[i])
@@ -216,12 +200,8 @@ int order_ascii(s_control *list)
     {
         if (tmp == NULL || tmp->next == NULL)
             break;
-        // printf("Comparing |%s| with |%s| \n", tmp->str, tmp->next->str);
         if (!is_ascii_ordered(tmp->str, tmp->next->str))
-        {
-            // printf("not ordered!\n");
             swap_elem(tmp->index, tmp->next->index, list);
-        }
         tmp = tmp->next;
     }
     return SUCCESS;
@@ -241,7 +221,6 @@ s_bool check_order(s_control *list)
             return (FALSE);
         tmp = tmp->next;
     }
-    // print_list(list);
     printf("List is ASCII ordered!\n");
     return (TRUE);
 }
@@ -276,6 +255,7 @@ int main(int argc, char **argv)
 
     printf("New printed linked list : \n");
     print_list(list);
+
     /* Free char *arr[] */
     j = -1;
     while (arr[++j])
